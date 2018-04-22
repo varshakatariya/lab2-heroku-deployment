@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "babel . --ignore node_modules,build --out-dir build",
-    "start": "node server.js",
-    "start:prod": "node build/server.js"
+    "start": "node app.js",
+    "start:prod": "node build/app.js"
   }
 }
