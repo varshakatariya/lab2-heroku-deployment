@@ -1,0 +1,20 @@
+{
+  "name": "freelancer-lab-2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {},
+  "license": "MIT",
+  "engines": {
+    "node": "9.9.0"
+  },
+  "dependencies": {
+    "concurrently": "^3.5.1"
+  },
+  "scripts": {
+    "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
+    "install": "(cd client && npm install) && (cd server && npm install)",
+    "start": "concurrently \"cd client && set PORT=3000 && npm start\" \"cd server && set PORT=3001 && npm start\"",
+    "start:prod": "cd server && npm start:prod",
+	"heroku-postbuild": "npm run build"
+  }
+}
