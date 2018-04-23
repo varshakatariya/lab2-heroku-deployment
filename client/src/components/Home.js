@@ -149,6 +149,7 @@ class Home extends React.Component{
             listOfProject : bckup
         })
         var searchStr = this.state.search;
+
         if(searchStr == ""){
             this.setState({
                 listOfProject : bckup
@@ -156,6 +157,7 @@ class Home extends React.Component{
         }else {
             this.setState({
                 listOfProject: this.state.listOfProjectBck.filter(function (project) {
+                    console.log("project.title.includes(searchStr)",project.title.includes(searchStr))
                     return (project.title.includes(searchStr) || project.skills.includes(searchStr));
                 })
             });

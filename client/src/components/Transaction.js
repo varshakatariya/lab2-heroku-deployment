@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from "react-redux";
 import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import PieChart from 'react-simple-pie-chart';
 
 class Transaction extends React.Component{
 
@@ -20,7 +21,8 @@ class Transaction extends React.Component{
         totalFund:0,
         transList:[],
         addMoney:"",
-        withdrawMoney:""
+        withdrawMoney:"",
+        crDrlist:[]
     }
 
     componentWillReceiveProps(nextProps) {
@@ -120,7 +122,7 @@ class Transaction extends React.Component{
     }
 
     render(){
-        const {redirect}  = this.state;
+        const {redirect,crDrlist}  = this.state;
         const {errors}  = this.state;
         const {message}  = this.state;
         const { userData } = this.props;
@@ -129,7 +131,20 @@ class Transaction extends React.Component{
                 pathname: '/login'
             }} />)
         console.log("message : ",this.state.message);
-
+        var crDr = {};
+        crDr = {color:'#008080',value:0};
+        crDrlist.push(crDr);
+        crDr = {color:'#808000',value:0};
+        crDrlist[1] = crDr;
+        for(let i=0;i<this.state.transList.length;i++){
+            if(this.state.transList[i].payment_type == 'Db'){
+                crDrlist[0].value+=Number(this.state.transList[i].amount);
+            }
+            else if(this.state.transList[i].payment_type == 'Cr'){
+                crDrlist[1].value+=Number(this.state.transList[i].amount);
+            }
+        }
+        console.log(JSON.stringify(this.state.crDrlist));
         return(
             <div>
                 <div id="credentials">
@@ -164,8 +179,19 @@ class Transaction extends React.Component{
                             <input type="text" id="withValue" value={this.state.withdrawMoney} onChange={(event)=>this.setState({withdrawMoney : event.target.value})} className="font-bold col-md-3"/>
                             <button type="button" onClick={this.withdrawMoney.bind(this)}> Withdraw Money </button>
                         </div>
+
+                        <div className="col-md-8 mt20" style={{paddingLeft:350}}>
+                                <PieChart slices={crDrlist} />
+                        </div>
+                            <div className="col-md-12 mt20">
+                                <input style={{backgroundColor:'#008080', padding:'7px', width: '3px', height : '3px'}}></input> <label className="fs14"> Credited Transactions </label>
+                                <input style={{backgroundColor:'#808000', padding:'7px' , width: '3px', height : '3px'}}></input> <label className="fs14"> Debited Transactions </label>
+                            </div>
+
+
                         <br/>
                         <br/>
+
                         <div>
                             <div className="mt30">
                                 <nav className="row bar nav-black">

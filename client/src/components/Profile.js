@@ -208,6 +208,8 @@ class Profile extends React.Component {
                     { this.state.docsPreview &&
                     <img src={ this.state.docsPreview } alt="image preview" />
                     }
+
+
                     <button onClick={this.updateUserDetails.bind(this)} className="btn btn-primary" >Update Details</button>
                     </div>
             </div>

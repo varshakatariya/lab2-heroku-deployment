@@ -76,6 +76,7 @@ class Dashboard_Employer extends React.Component{
         });
     }
 
+
     searchData(){
 
         var projectList = [];
@@ -85,6 +86,7 @@ class Dashboard_Employer extends React.Component{
             listOfProjects_emp : bckup
         })
         var searchStr = this.state.search;
+        console.log("searchStr--------------------",searchStr);
         if(searchStr == ""){
             this.setState({
                 listOfProjects_emp : bckup
@@ -92,11 +94,22 @@ class Dashboard_Employer extends React.Component{
         }else {
             this.setState({
                 listOfProjects_emp: this.state.listOfProjectBck.filter(function (project) {
-                    return (project.project_name.includes(searchStr));
+                    var testStr = project.project_name + "";
+                    if(testStr.indexOf(searchStr) != -1) {
+                        console.log("------------found---------- ");
+                        return true;
+                    }
                 })
             });
         }
     }
+
+    chkProject(project, searchStr){
+        if(project.project_name.includes(searchStr))
+            return true;
+        else false;
+    }
+
 
     onChangeStatus(e){
 

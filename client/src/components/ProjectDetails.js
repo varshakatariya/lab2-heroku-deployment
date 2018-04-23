@@ -8,7 +8,7 @@ import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import freelancer from '../freelancer.svg';
-
+import dd from './download.jpg';
 class ProjectDetails extends React.Component{
 
     state={
@@ -204,7 +204,7 @@ class ProjectDetails extends React.Component{
                                         <div className="mt30">
                                             <nav className="row bar nav-black">
                                                 <div className="col-md-3 mt10 mb10">Freelancer Name</div>
-                                                <div className="col-md-3 mt10 mb10">Bid Price</div>
+                                                <div className="col-md-2 mt10 mb10">Bid Price</div><i className="fa fa-sort-asc mt5" onClick={() => this.sortList("bid_price","asc")}></i>Sort<i className="fa fa-sort-desc md10" onClick={() => this.sortList("bid_price","desc")}></i>
                                                 <div className="col-md-3 mt10 mb10">Period in Days</div>
                                                 { projectData.data.projectData.isEmployer ?  <div className="col-md-3 mt10 mb10" id="hireLabel">Hire</div>  : '' }
                                             </nav>
@@ -223,7 +223,12 @@ class ProjectDetails extends React.Component{
                                             )}
                                         </div>
                                     </div>
-                                    : <div className="col-md-12 mt15 mb15"><button className="btn btn-primary hireBtn" onClick={() => this.payment(this.state.projectDetails)}>Make Payment</button></div> }
+                                    : <div className="col-md-12 mt15 mb15">
+                                        <div className="col-md-12 mt15 mb15">
+                                        <img src={dd} style={{width:'30px', height:'30px'}}></img>
+                                            <p>Click to download Solution</p>
+                                        </div>
+                                        <button className="btn btn-primary hireBtn" onClick={() => this.payment(this.state.projectDetails)}>Make Payment</button></div> }
                             </div>
                             : <div>
                                 <h4>Project is closed for hiring</h4>

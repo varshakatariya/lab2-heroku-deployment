@@ -78,9 +78,7 @@ class Dashboard_Freelancer extends React.Component{
     }
 
     searchData(){
-        /* if("krutika mude".includes(this.state.search)) {
-             alert(this.state.search);
-         }*/
+
         var projectList = [];
         var bckup = this.state.listOfProjectBck;
 
@@ -95,7 +93,11 @@ class Dashboard_Freelancer extends React.Component{
         }else {
                 this.setState({
                     listOfProject: this.state.listOfProjectBck.filter(function (project) {
-                        return (project.ProjectName.includes(searchStr));
+                        var testStr = project.ProjectName + "";
+                        if(testStr.indexOf(searchStr) != -1) {
+                            console.log("------------found---------- ");
+                            return true;
+                        }
                     })
                 });
             }
